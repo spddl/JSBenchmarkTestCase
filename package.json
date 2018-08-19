@@ -1,0 +1,11 @@
+{
+  "name": "JSBenchmarkTestCase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "spddl",
+  "license": "ISC",
+  "dependencies": {
+    "benchmark": "^2.1.4"
+  }
+}
