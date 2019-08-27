@@ -6,6 +6,9 @@
   "author": "spddl",
   "license": "ISC",
   "dependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "date-fns": "^2.0.1",
+    "fecha": "^3.0.3",
+    "moment": "^2.24.0"
   }
 }
