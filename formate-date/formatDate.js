@@ -119,14 +119,14 @@ suiteFormatDate
 
 // ///////////////////////////////////////////////////////////////
 
-const _memoizedFormatDateStringTripleEquals = (Datenow = 0) => {
+const _memoizedFormatDateStringTripleEquals = (Datenow = 0, mobile) => {
   let cacheInout = 0
   let cacheOutput = ''
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (cacheInout === Datenow) {
       return cacheOutput
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cacheInout = Datenow
       cacheOutput = result
       return result
@@ -135,14 +135,14 @@ const _memoizedFormatDateStringTripleEquals = (Datenow = 0) => {
 }
 const memoizedFormatDateStringTripleEquals = _memoizedFormatDateStringTripleEquals()
 
-const _memoizedFormatDateStringDoubleEquals = (Datenow = 0) => {
+const _memoizedFormatDateStringDoubleEquals = (Datenow = 0, mobile) => {
   let cacheInout = 0
   let cacheOutput = ''
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (cacheInout == Datenow) {
       return cacheOutput
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cacheInout = Datenow
       cacheOutput = result
       return result
@@ -151,14 +151,14 @@ const _memoizedFormatDateStringDoubleEquals = (Datenow = 0) => {
 }
 const memoizedFormatDateStringDoubleEquals = _memoizedFormatDateStringDoubleEquals()
 
-const _memoizedFormatDateStringObjectIs = (Datenow = 0) => {
+const _memoizedFormatDateStringObjectIs = (Datenow = 0, mobile) => {
   let cacheInout = 0
   let cacheOutput = ''
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (Object.is(cacheInout, Datenow)) {
       return cacheOutput
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cacheInout = Datenow
       cacheOutput = result
       return result
@@ -167,13 +167,13 @@ const _memoizedFormatDateStringObjectIs = (Datenow = 0) => {
 }
 const memoizedFormatDateStringObjectIs = _memoizedFormatDateStringObjectIs()
 
-const _memoizedFormatDateArray = (Datenow) => {
+const _memoizedFormatDateArray = (Datenow, mobile) => {
   let cache = []
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (cache[0] === Datenow) {
       return cache[1]
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cache[0] = Datenow
       cache[1] = result
       return result
@@ -182,13 +182,13 @@ const _memoizedFormatDateArray = (Datenow) => {
 }
 const memoizedFormatDateArray = _memoizedFormatDateArray()
 
-const _memoizedFormatDateObject = (Datenow) => {
+const _memoizedFormatDateObject = (Datenow, mobile) => {
   let cache = {}
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (cache[Datenow]) {
       return cache[Datenow]
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cache = { [Datenow]: result }
       return result
     }
@@ -196,13 +196,13 @@ const _memoizedFormatDateObject = (Datenow) => {
 }
 const memoizedFormatDateObject = _memoizedFormatDateObject()
 
-const _memoizedFormatDateMapClear = (Datenow) => {
+const _memoizedFormatDateMapClear = (Datenow, mobile) => {
   let cache = new Map()
-  return (Datenow) => {
+  return (Datenow, mobile) => {
     if (cache.has(Datenow)) {
       return cache.get(Datenow)
     } else {
-      const result = _FormatDate2(Datenow)
+      const result = _FormatDate2(Datenow, mobile)
       cache.clear() // clear() ist notwenig da hier immer nur der letzte wert gecacht werden soll
       // ohne werden alle ${arrUniqe.length} gespeichert und beim nächsten aufruf nur noch wiedergegeben
       cache.set(Datenow, result)
@@ -266,23 +266,24 @@ suiteMemoizedFormatDate
   })
   .run({ 'async': false })
 
-// cpu: Intel(R) Core(TM) i7 - 9700K CPU @3.60GHz
-// NodeJS version: v10.15.3
-// platform: win32
+/*
+cpu: Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+NodeJS version: v10.15.3
+platform: win32
 
-// Native_String() x 1, 663 ops / sec ±0.46 % (95 runs sampled)
-// Native_slice(-2) x 1, 860 ops / sec ±0.38 % (96 runs sampled)
-// Native_num < 10 x 1, 942 ops / sec ±0.46 % (95 runs sampled)
+Native_String() x 1,635 ops/sec ±0.61% (92 runs sampled)
+Native_slice(-2) x 1,856 ops/sec ±0.61% (96 runs sampled)
+Native_num<10 x 1,960 ops/sec ±0.47% (95 runs sampled)
 
-// Fastest is Native_num < 10
+Fastest is Native_num<10
 
+Native x 1,972 ops/sec ±0.23% (96 runs sampled)
+StringTripleEquals x 3,749 ops/sec ±0.76% (94 runs sampled)
+StringDoubleEquals x 3,777 ops/sec ±0.25% (94 runs sampled)
+StringObjectIs x 3,691 ops/sec ±0.28% (96 runs sampled)
+ArrayTripleEquals x 3,702 ops/sec ±0.64% (97 runs sampled)
+Object x 1,311 ops/sec ±1.17% (92 runs sampled)
+Map+Clear x 1,921 ops/sec ±0.96% (86 runs sampled)
 
-// Native x 1, 981 ops / sec ±0.36 % (97 runs sampled)
-// StringTripleEquals x 3, 734 ops / sec ±0.70 % (97 runs sampled)
-// StringDoubleEquals x 3, 747 ops / sec ±0.76 % (96 runs sampled)
-// StringObjectIs x 3, 700 ops / sec ±0.19 % (97 runs sampled)
-// ArrayTripleEquals x 3, 678 ops / sec ±0.58 % (96 runs sampled)
-// Object x 1, 263 ops / sec ±1.26 % (92 runs sampled)
-// Map + Clear x 1, 943 ops / sec ±0.85 % (86 runs sampled)
-
-// Fastest is StringDoubleEquals
+Fastest is StringDoubleEquals,StringTripleEquals
+*/
